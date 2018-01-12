@@ -1,2 +1,2 @@
-# Web Server(WEB/API Server)
-Spring Boot / Hibernate / JPA / Security
+# Web Server(OAuth2 / API Server)
+Spring Boot / Hibernate / MySQL / JPA / Security
