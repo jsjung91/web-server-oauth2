@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title th:remove="all">Order Confirmation</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style type="text/css">
+		p {
+			color: navy;
+		}
+		
+		li {
+			color: blue;
+		}
+		</style>
+	</head>
+	<body>
+		<div align="center">
+			<!-- src="pulpitrock.jpg"  -->
+			<img th:src="'cid:' + ${companyLogo}" height="100" width="200" />
+		</div>
+		<div>
+			<p th:text="'Dear, '+ ${Content.username}"></p>
+			<p>MTOS Solutions DCOStack 생성하신 Instance Summary List 입니다.</p>
+	
+			<p>
+				<b>Team name : </b><span th:text="${Content.mailData[0]}"></span>
+			</p>
+			<p>
+				<b>Purpose : </b><span th:text="${Content.mailData[1]}"></span>
+			</p>
+			<p>
+				<b>CPU : </b><span th:text="${Content.mailData[2]}"></span>
+			</p>
+			<p>
+				<b>Storage : </b><span th:text="${Content.mailData[3]}"></span>
+			</p>
+			<p>
+				<b>OS : </b><span th:text="${Content.mailData[4]}"></span>
+			</p>
+			<p>
+				<b>Instance : </b><span th:text="${Content.mailData[5]}"></span>
+			</p>
+	
+			<p th:text="${Content.message}"></p>
+		</div>
+	</body>
+</html>

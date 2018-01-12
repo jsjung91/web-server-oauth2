@@ -1,0 +1,9 @@
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\ApiServerApplication.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\model\UserModel.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\service\MailService.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\model\MailRequest.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\controller\MailController.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\service\UserService.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\model\MailBodyContent.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\repository\UserRepository.java
+D:\Dev\Workspace\EclipseWorkspace\web-demo\api-server\src\main\java\com\api\controller\UserController.java
