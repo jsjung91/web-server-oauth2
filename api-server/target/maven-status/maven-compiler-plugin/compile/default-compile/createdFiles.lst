@@ -1,1 +1,12 @@
+com\api\repository\ComputeRepository.class
+com\api\model\MailRequest.class
+com\api\controller\ComputeController.class
+com\api\controller\UserController.class
 com\api\ApiServerApplication.class
+com\api\config\SecurityResourceServerConfig.class
+com\api\repository\UserRepository.class
+com\api\service\MailService.class
+com\api\model\UserModel.class
+com\api\controller\MailController.class
+com\api\model\MailBodyContent.class
+com\api\model\ComputeModel.class

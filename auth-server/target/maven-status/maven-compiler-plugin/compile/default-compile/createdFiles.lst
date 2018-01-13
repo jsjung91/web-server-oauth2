@@ -1,0 +1,5 @@
+com\auth\config\OAuth2AuthorizationConfig.class
+com\auth\service\UserService.class
+com\auth\AuthServerApplication.class
+com\auth\repository\UserRepository.class
+com\auth\model\User.class

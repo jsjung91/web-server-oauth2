@@ -31,4 +31,4 @@ CREATE TABLE `member` (
   UNIQUE KEY `m_email_UNIQUE` (`m_email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1007 DEFAULT CHARSET=utf8
 
-insert into member values(100, "Lee", "SeungYoon", "South Korea", "sylee@mtos.co.kr", "$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu", now(), 1)
+insert into member values(100, "Lee", "SeungYoon", "South Korea", "sylee@mtos.co.kr", "$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu", now(), 1)
