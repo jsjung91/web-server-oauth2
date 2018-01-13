@@ -16,10 +16,7 @@
 	</properties>
 
 	<modules>
-		<module>oauth-server</module>
-		<module>resource-server</module>
 		<module>api-server</module>
-		<module>client-server</module>
 		<module>auth-server</module>
 	</modules>
 
