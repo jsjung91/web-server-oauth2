@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.model.UserModel;
 import com.api.repository.UserRepository;
+import com.api.util.ApiResponse;
 import com.api.util.PasswordEncode;
 
 @RestController
@@ -40,16 +41,18 @@ public class UserController {
 	
 	//Login
 	@GetMapping("/login/{m_email:.+}/{m_pwd}")
-	public ResponseEntity<UserModel> login(@PathVariable(value="m_email") String m_email,
+	public ResponseEntity<ApiResponse> login(@PathVariable(value="m_email") String m_email,
 											@PathVariable(value="m_pwd") String m_pwd) {
 		UserModel user = userRepository.findByMail(m_email);
 		
 		if(user == null || !passwordEncode.matches(m_pwd, user.getM_pwd())) {
-			return ResponseEntity.notFound().build();
+//			return ResponseEntity.notFound().build();
+			return new ApiResponse().send(HttpStatus.NOT_FOUND, "Data is wrong");
 		}
 		
 //		return ResponseEntity.ok().body(user);
-		return new ResponseEntity<UserModel>(user, HttpStatus.OK);
+//		return new ResponseEntity<UserModel>(user, HttpStatus.OK);
+		return new ApiResponse(user).send(HttpStatus.OK);
 		
 	}
 	
