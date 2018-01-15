@@ -63,6 +63,7 @@ public class UserController {
 		String endodePwd = passwordEncode.encode(createUser.getM_pwd());
 		
 		createUser.setM_pwd(endodePwd);
+		createUser.setEnabled(true);
 		
 		return userRepository.save(createUser);
 	}
