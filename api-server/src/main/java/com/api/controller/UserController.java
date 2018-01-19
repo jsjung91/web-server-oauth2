@@ -26,104 +26,134 @@ import com.api.util.PasswordEncode;
 @RestController
 @RequestMapping("/rest/v1/user")
 public class UserController {
-	
+
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	ComputeController computeControll;
+	
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
 	PasswordEncode passwordEncode = new PasswordEncode(passwordEncoder);
-	
+
 	//Get All
 	@GetMapping("/all")
-	public List<UserModel> getAllUsers() {
-		return userRepository.findAll();
+	public ResponseEntity<ApiResponse> getAllUsers() {
+		List<UserModel> user = userRepository.findAll();
+
+		if(user == null) {
+			return new ApiResponse().errorSend(HttpStatus.NOT_FOUND, "Data is not Found");
+		}
+
+		return new ApiResponse(user).send(HttpStatus.OK);
 	}
-	
+
 	//Login
 	@GetMapping("/login/{m_email:.+}/{m_pwd}")
 	public ResponseEntity<ApiResponse> login(@PathVariable(value="m_email") String m_email,
-											@PathVariable(value="m_pwd") String m_pwd) {
+			@PathVariable(value="m_pwd") String m_pwd) {
 		UserModel user = userRepository.findByMail(m_email);
-		
+
 		if(user == null || !passwordEncode.matches(m_pwd, user.getM_pwd())) {
-//			return ResponseEntity.notFound().build();
-			return new ApiResponse().send(HttpStatus.NOT_FOUND, "Data is wrong");
+			return new ApiResponse().errorSend(HttpStatus.NOT_FOUND, "Data is Invalid");
 		}
 		
-//		return ResponseEntity.ok().body(user);
-//		return new ResponseEntity<UserModel>(user, HttpStatus.OK);
+		computeControll.isLoginMail = m_email;
+
 		return new ApiResponse(user).send(HttpStatus.OK);
-		
+
 	}
 	
+	//Logout
+	@GetMapping("/logout")
+	public ResponseEntity<ApiResponse> logout() {
+
+		if(computeControll.isLoginMail == "") {
+			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Logout Fail");
+		}
+		
+		computeControll.isLoginMail = "";
+		
+		return new ApiResponse().send(HttpStatus.OK);
+
+	}
+
 	//Create User
 	@PostMapping("/create")
-	public UserModel createUser(@Valid @RequestBody UserModel createUser) {
+	public ResponseEntity<ApiResponse> createUser(@Valid @RequestBody UserModel createUser) {
+
+		if(createUser == null) {
+			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed Create User");	
+		}
 		
 		String endodePwd = passwordEncode.encode(createUser.getM_pwd());
-		
+
 		createUser.setM_pwd(endodePwd);
 		createUser.setEnabled(true);
 		
-		return userRepository.save(createUser);
+		userRepository.save(createUser);
+		
+		return new ApiResponse(createUser).send(HttpStatus.OK);
 	}
-	
+
 	//Get User By Id
 	@GetMapping("/getbyid/{m_id}")
-	public ResponseEntity<UserModel> getUserById(@PathVariable(value="m_id") int m_id) {
+	public ResponseEntity<ApiResponse> getUserById(@PathVariable(value="m_id") int m_id) {
 		UserModel user = userRepository.findOne(m_id);
-		
+
 		if(user == null) {
-			return ResponseEntity.notFound().build();
+			return new ApiResponse().errorSend(HttpStatus.NOT_FOUND, "Data is Not Found");	
 		}
-		
-		return ResponseEntity.ok().body(user);
+
+		return new ApiResponse(user).send(HttpStatus.OK);
 	}
-	
+
 	//Get User By Email
 	@GetMapping("/getbymail/{m_email:.+}") //Email 주소 짤리는 문제로인한 :.+ 추가
-	public ResponseEntity<UserModel> getUserBymail(@PathVariable(value="m_email") String m_email) {
-		
+	public ResponseEntity<ApiResponse> getUserBymail(@PathVariable(value="m_email") String m_email) {
+
 		UserModel user = userRepository.findByMail(m_email);
-		
+
 		if(user == null) {
-			return ResponseEntity.notFound().build();
+			return new ApiResponse().errorSend(HttpStatus.NOT_FOUND, "Data is Not Found");
 		}
-		
-		return ResponseEntity.ok().body(user);
+
+		return new ApiResponse(user).send(HttpStatus.OK);
 	}
-	
+
 	//Update a User
 	@PutMapping("/update/{m_id}")
-	public ResponseEntity<UserModel> updateUser(@PathVariable(value="m_id") int m_id,
-													@Valid @RequestBody UserModel userDetails) {
+	public ResponseEntity<ApiResponse> updateUser(@PathVariable(value="m_id") int m_id,
+			@Valid @RequestBody UserModel userDetails) {
+		
 		UserModel user = userRepository.findOne(m_id);
-		
+
 		if(user == null) {
-			return ResponseEntity.notFound().build();
+			return new ApiResponse().errorSend(HttpStatus.NOT_MODIFIED, "Data is Not Modified");
 		}
-		
+
 		user.setM_lastname(userDetails.getM_lastname());
 		user.setM_firstname(userDetails.getM_firstname());
 		user.setM_country(userDetails.getM_country());
-		
+
 		UserModel updateUser = userRepository.save(user);
-		
-		return ResponseEntity.ok(updateUser);
+
+		return new ApiResponse(updateUser).send(HttpStatus.OK);
 	}
-	
+
 	//Delete a User
 	@DeleteMapping("/delete/{m_id}")
-	public ResponseEntity<UserModel> deleteUser(@PathVariable(value="m_id") int m_id) {
+	public ResponseEntity<ApiResponse> deleteUser(@PathVariable(value="m_id") int m_id) {
+		
 		UserModel user = userRepository.findOne(m_id);
-		
+
 		if(user == null) {
-			return ResponseEntity.notFound().build();
+			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed");
 		}
-		
+
 		userRepository.delete(user);
-		
-		return ResponseEntity.ok().build();
+
+		return new ApiResponse(user).send(HttpStatus.OK);
 	}
 
 }

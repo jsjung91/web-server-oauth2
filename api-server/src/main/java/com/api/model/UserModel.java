@@ -2,12 +2,17 @@ package com.api.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -44,6 +49,9 @@ public class UserModel implements Serializable {
 	
 	@Column(name="m_enabled")
 	private boolean enabled;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="userModel", cascade=CascadeType.ALL)
+	private Set<ComputeModel> instanceLists = new HashSet<ComputeModel>();
 
 	public int getM_id() {
 		return m_id;
@@ -107,6 +115,14 @@ public class UserModel implements Serializable {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Set<ComputeModel> getInstanceLists() {
+		return instanceLists;
+	}
+
+	public void setInstanceLists(Set<ComputeModel> instanceLists) {
+		this.instanceLists = instanceLists;
 	}
 	
 }

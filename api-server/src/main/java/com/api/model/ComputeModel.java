@@ -5,12 +5,17 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "instance")
@@ -47,6 +52,11 @@ public class ComputeModel implements Serializable {
 	@Column(name = "i_regdate")
 	@CreationTimestamp
 	private Date i_regdate;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="m_id")
+	@JsonBackReference
+	private UserModel userModel;
 
 	public int getI_id() {
 		return i_id;
@@ -119,4 +129,13 @@ public class ComputeModel implements Serializable {
 	public void setI_regdate(Date i_regdate) {
 		this.i_regdate = i_regdate;
 	}
+
+	public UserModel getUserModel() {
+		return userModel;
+	}
+
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
+	}
+	
 }

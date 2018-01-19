@@ -32,3 +32,22 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1007 DEFAULT CHARSET=utf8
 
 insert into member values(100, "Lee", "SeungYoon", "South Korea", "sylee@mtos.co.kr", "$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu", now(), 1)
+
+CREATE TABLE `instance` (
+  `i_id` int(11) NOT NULL AUTO_INCREMENT,
+  `i_teamname` varchar(45) NOT NULL,
+  `i_purpose` varchar(45) NOT NULL,
+  `i_cpu` varchar(45) NOT NULL,
+  `i_storage` varchar(45) NOT NULL,
+  `i_os` varchar(45) NOT NULL,
+  `i_count` int(11) NOT NULL,
+  `i_enable` tinyint(4) DEFAULT '0',
+  `i_regdate` date DEFAULT NULL,
+  `m_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`i_id`),
+  UNIQUE KEY `i_id_UNIQUE` (`i_id`),
+  UNIQUE KEY `i_teamname_UNIQUE` (`i_teamname`),
+  KEY `fk_member_idx` (`m_id`),
+  CONSTRAINT `FK6t6sg4s1c1qnfc58ytgbvalpo` FOREIGN KEY (`m_id`) REFERENCES `member` (`m_id`),
+  CONSTRAINT `fk_member` FOREIGN KEY (`m_id`) REFERENCES `member` (`m_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8

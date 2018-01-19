@@ -23,7 +23,7 @@ public class ApiResponse {
         return new ResponseEntity<ApiResponse>(this, status);
     }
 
-    public ResponseEntity<ApiResponse> send(HttpStatus status, String error) {
+    public ResponseEntity<ApiResponse> errorSend(HttpStatus status, String error) {
         this.status = status;
         this.error = error;
         return new ResponseEntity<ApiResponse>(this, status);
