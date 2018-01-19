@@ -59,8 +59,18 @@ public class UserController {
 		}
 		
 		computeControll.isLoginMail = m_email;
+		
+		UserModel loginData = new UserModel();
+		
+		loginData.setM_id(user.getM_id());
+		loginData.setM_lastname(user.getM_lastname());
+		loginData.setM_firstname(user.getM_firstname());
+		loginData.setM_country(user.getM_country());
+		loginData.setM_email(user.getM_email());
+		loginData.setM_pwd(user.getM_pwd());
+		loginData.setEnabled(user.isEnabled());
 
-		return new ApiResponse(user).send(HttpStatus.OK);
+		return new ApiResponse(loginData).send(HttpStatus.OK);
 
 	}
 	

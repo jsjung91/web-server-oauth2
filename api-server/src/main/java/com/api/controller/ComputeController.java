@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.api.model.ComputeModel;
+import com.api.model.UserModel;
 import com.api.repository.ComputeRepository;
 import com.api.repository.UserRepository;
 import com.api.util.ApiResponse;
@@ -29,17 +29,26 @@ public class ComputeController {
 	@Autowired
 	private UserRepository userRepo;
 	
-	private String redirectUrl = "http://localhost:8080/rest/v1";
+//	private String redirectUrl = "http://localhost:8080/rest/v1";
 	
 	public String isLoginMail = "";
 	
 	
 	//Get all
 	@GetMapping("/all")
-	public RedirectView getAllInstances() {
+	public ResponseEntity<ApiResponse> getAllInstances() {
 //		return computeRepo.findAll();
 		
-		return new RedirectView(redirectUrl+"/user/getbymail/"+isLoginMail);
+//		return new RedirectView(redirectUrl+"/user/getbymail/"+isLoginMail);
+		UserModel user = userRepo.findByMail(isLoginMail);
+		
+		if(user == null) {
+			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed");
+		}else if(isLoginMail == "") {
+			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
+		}
+		
+		return new ApiResponse(user.getInstanceLists()).send(HttpStatus.OK);
 	}
 	
 	@PostMapping("/create")

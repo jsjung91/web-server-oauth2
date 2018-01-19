@@ -14,7 +14,7 @@ public class SecurityResourceServerConfig extends ResourceServerConfigurerAdapte
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/rest/v1/user/create").permitAll()
+                .antMatchers("/rest/v1/user/create", "/rest/v1/user/logout").permitAll()
                 .antMatchers("/rest/v1/**")
                 .access("#oauth2.hasScope('openid')");
     }
