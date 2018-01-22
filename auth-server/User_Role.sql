@@ -41,13 +41,12 @@ CREATE TABLE `instance` (
   `i_storage` varchar(45) NOT NULL,
   `i_os` varchar(45) NOT NULL,
   `i_count` int(11) NOT NULL,
-  `i_enable` tinyint(4) DEFAULT '0',
-  `i_regdate` date DEFAULT NULL,
-  `m_id` int(11) DEFAULT NULL,
+  `i_enable` tinyint(4) NOT NULL DEFAULT '0',
+  `i_regdate` date NOT NULL,
+  `m_id` int(11) NOT NULL,
   PRIMARY KEY (`i_id`),
   UNIQUE KEY `i_id_UNIQUE` (`i_id`),
   UNIQUE KEY `i_teamname_UNIQUE` (`i_teamname`),
   KEY `fk_member_idx` (`m_id`),
-  CONSTRAINT `FK6t6sg4s1c1qnfc58ytgbvalpo` FOREIGN KEY (`m_id`) REFERENCES `member` (`m_id`),
-  CONSTRAINT `fk_member` FOREIGN KEY (`m_id`) REFERENCES `member` (`m_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8
+  CONSTRAINT `FK6t6sg4s1c1qnfc58ytgbvalpo` FOREIGN KEY (`m_id`) REFERENCES `member` (`m_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8
