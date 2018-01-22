@@ -78,9 +78,11 @@ public class UserController {
 	@GetMapping("/logout")
 	public ResponseEntity<ApiResponse> logout() {
 
-		if(computeControll.isLoginMail != "") {
-			computeControll.isLoginMail = "";
+		if(computeControll.isLoginMail == "") {
+			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Logout Fail");
 		}
+		
+		computeControll.isLoginMail = "";
 		
 		return new ApiResponse().send(HttpStatus.OK);
 
