@@ -37,9 +37,8 @@ public class ComputeController {
 	//Get all
 	@GetMapping("/all")
 	public ResponseEntity<ApiResponse> getAllInstances() {
-//		return computeRepo.findAll();
-		
 //		return new RedirectView(redirectUrl+"/user/getbymail/"+isLoginMail);
+		
 		UserModel user = userRepo.findByMail(isLoginMail);
 		
 		if(user == null) {
