@@ -46,6 +46,8 @@ public class MailService {
 		
 		helper.addInline(image.getName(), imageSource, image.getContentType());
 		
+//		helper.setCc(cc); 참조자 설정 메서드
+		
 		sender.send(mail);
 		
 		return "Mail send successfully !!!"; //JSON 형식으로 변경 예정

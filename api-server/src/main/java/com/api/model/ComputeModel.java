@@ -47,7 +47,7 @@ public class ComputeModel implements Serializable {
 	private String i_count;
 	
 	@Column(name = "i_enable")
-	private String i_enable;
+	private boolean i_enable;
 
 	@Column(name = "i_regdate")
 	@CreationTimestamp
@@ -114,20 +114,20 @@ public class ComputeModel implements Serializable {
 		this.i_count = i_count;
 	}
 	
-	public String getI_enable() {
-		return i_enable;
-	}
-
-	public void setI_enable(String i_enable) {
-		this.i_enable = i_enable;
-	}
-
 	public Date getI_regdate() {
 		return i_regdate;
 	}
 
 	public void setI_regdate(Date i_regdate) {
 		this.i_regdate = i_regdate;
+	}
+	
+	public boolean isI_enable() {
+		return i_enable;
+	}
+
+	public void setI_enable(boolean i_enable) {
+		this.i_enable = i_enable;
 	}
 
 	public UserModel getUserModel() {
