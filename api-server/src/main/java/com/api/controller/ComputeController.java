@@ -59,7 +59,7 @@ public class ComputeController {
 			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
 		}
 
-		createInstance.setUserModel(userRepo.findByMail(userControl.isLoginMailID));
+		createInstance.setInsUserModel(userRepo.findByMail(userControl.isLoginMailID));
 
 		computeRepo.save(createInstance);
 

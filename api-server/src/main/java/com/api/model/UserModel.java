@@ -50,10 +50,10 @@ public class UserModel implements Serializable {
 	@Column(name="m_enabled")
 	private boolean enabled;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="userModel", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="insUserModel", cascade=CascadeType.ALL)
 	private Set<ComputeModel> instanceLists = new HashSet<ComputeModel>();
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="userModel", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="reqUserModel", cascade=CascadeType.ALL)
 	private Set<FunctionReqModel> functionReqLists = new HashSet<FunctionReqModel>();
 
 	public int getM_id() {

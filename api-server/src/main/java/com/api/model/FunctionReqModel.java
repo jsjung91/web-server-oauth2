@@ -29,13 +29,13 @@ public class FunctionReqModel implements Serializable {
 	private int f_id;
 
 	@Column(name = "f_title")
-	private String f_teamname;
+	private String f_title;
 
 	@Column(name = "f_kind")
-	private String f_purpose;
+	private String f_kind;
 
 	@Column(name = "f_detail")
-	private String f_cpu;
+	private String f_detail;
 
 	@Column(name = "f_regdate")
 	@CreationTimestamp
@@ -44,7 +44,7 @@ public class FunctionReqModel implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="m_id")
 	@JsonBackReference
-	private UserModel userModel;
+	private UserModel reqUserModel;
 
 	public int getF_id() {
 		return f_id;
@@ -54,28 +54,28 @@ public class FunctionReqModel implements Serializable {
 		this.f_id = f_id;
 	}
 
-	public String getF_teamname() {
-		return f_teamname;
+	public String getF_title() {
+		return f_title;
 	}
 
-	public void setF_teamname(String f_teamname) {
-		this.f_teamname = f_teamname;
+	public void setF_title(String f_title) {
+		this.f_title = f_title;
 	}
 
-	public String getF_purpose() {
-		return f_purpose;
+	public String getF_kind() {
+		return f_kind;
 	}
 
-	public void setF_purpose(String f_purpose) {
-		this.f_purpose = f_purpose;
+	public void setF_kind(String f_kind) {
+		this.f_kind = f_kind;
 	}
 
-	public String getF_cpu() {
-		return f_cpu;
+	public String getF_detail() {
+		return f_detail;
 	}
 
-	public void setF_cpu(String f_cpu) {
-		this.f_cpu = f_cpu;
+	public void setF_detail(String f_detail) {
+		this.f_detail = f_detail;
 	}
 
 	public Date getF_regdate() {
@@ -86,12 +86,12 @@ public class FunctionReqModel implements Serializable {
 		this.f_regdate = f_regdate;
 	}
 
-	public UserModel getUserModel() {
-		return userModel;
+	public UserModel getReqUserModel() {
+		return reqUserModel;
 	}
 
-	public void setUserModel(UserModel userModel) {
-		this.userModel = userModel;
+	public void setReqUserModel(UserModel reqUserModel) {
+		this.reqUserModel = reqUserModel;
 	}
-	
+
 }

@@ -56,7 +56,7 @@ public class FunctionReqController {
 			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
 		}
 
-		createFunctionReq.setUserModel(userRepo.findByMail(userControl.isLoginMailID));
+		createFunctionReq.setReqUserModel(userRepo.findByMail(userControl.isLoginMailID));
 
 		functionreqRepo.save(createFunctionReq);
 

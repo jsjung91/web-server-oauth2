@@ -56,7 +56,7 @@ public class ComputeModel implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="m_id")
 	@JsonBackReference
-	private UserModel userModel;
+	private UserModel insUserModel;
 
 	public int getI_id() {
 		return i_id;
@@ -130,12 +130,12 @@ public class ComputeModel implements Serializable {
 		this.i_enable = i_enable;
 	}
 
-	public UserModel getUserModel() {
-		return userModel;
+	public UserModel getInsUserModel() {
+		return insUserModel;
 	}
 
-	public void setUserModel(UserModel userModel) {
-		this.userModel = userModel;
+	public void setInsUserModel(UserModel insUserModel) {
+		this.insUserModel = insUserModel;
 	}
-	
+
 }
