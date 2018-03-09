@@ -52,6 +52,9 @@ public class UserModel implements Serializable {
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="userModel", cascade=CascadeType.ALL)
 	private Set<ComputeModel> instanceLists = new HashSet<ComputeModel>();
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="userModel", cascade=CascadeType.ALL)
+	private Set<FunctionReqModel> functionReqLists = new HashSet<FunctionReqModel>();
 
 	public int getM_id() {
 		return m_id;
@@ -123,6 +126,14 @@ public class UserModel implements Serializable {
 
 	public void setInstanceLists(Set<ComputeModel> instanceLists) {
 		this.instanceLists = instanceLists;
+	}
+
+	public Set<FunctionReqModel> getFunctionReqLists() {
+		return functionReqLists;
+	}
+
+	public void setFunctionReqLists(Set<FunctionReqModel> functionReqLists) {
+		this.functionReqLists = functionReqLists;
 	}
 	
 }
