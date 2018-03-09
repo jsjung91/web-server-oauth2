@@ -26,6 +26,7 @@ public class SecurityResourceServerConfig extends ResourceServerConfigurerAdapte
                 		"/rest/v1/user/create", 
                 		"/rest/v1/user/logout", 
                 		"/rest/v1/compute/instance/**",
+                		"/rest/v1/compute/funcreq/**",
                 		"/rest/v1/response/**"
                 		).permitAll()
                 .antMatchers("/rest/v1/**")
