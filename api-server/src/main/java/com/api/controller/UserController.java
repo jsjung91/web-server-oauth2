@@ -30,11 +30,10 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	ComputeController computeControll;
-	
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
 	PasswordEncode passwordEncode = new PasswordEncode(passwordEncoder);
+	
+	String isLoginMailID = "";
 
 	//Get All
 	@GetMapping("/all")
@@ -58,7 +57,7 @@ public class UserController {
 			return new ApiResponse().errorSend(HttpStatus.NOT_FOUND, "Data is Invalid");
 		}
 		
-		computeControll.isLoginMail = m_email;
+		isLoginMailID = m_email;
 		
 		UserModel loginData = new UserModel();
 		
@@ -78,8 +77,8 @@ public class UserController {
 	@GetMapping("/logout")
 	public ResponseEntity<ApiResponse> logout() {
 
-		if(computeControll.isLoginMail != "") {
-			computeControll.isLoginMail = "";
+		if(isLoginMailID != "") {
+			isLoginMailID = "";
 		}
 		
 		return new ApiResponse().send(HttpStatus.OK);

@@ -28,18 +28,19 @@ public class FunctionReqController {
 
 	@Autowired
 	private UserRepository userRepo;
-
-	public String isLoginMail = "";
+	
+	@Autowired
+	private UserController userControl;
 
 	//Get all
 	@GetMapping("/all")
 	public ResponseEntity<ApiResponse> getAlFunctionReqs() {
 
-		UserModel user = userRepo.findByMail(isLoginMail);
+		UserModel user = userRepo.findByMail(userControl.isLoginMailID);
 
 		if(user == null) {
 			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed");
-		}else if(isLoginMail == "") {
+		}else if(userControl.isLoginMailID == "") {
 			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
 		}
 
@@ -51,11 +52,11 @@ public class FunctionReqController {
 
 		if(createFunctionReq == null) {
 			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed");	
-		}else if(isLoginMail == "") {
+		}else if(userControl.isLoginMailID == "") {
 			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
 		}
 
-		createFunctionReq.setUserModel(userRepo.findByMail(isLoginMail));
+		createFunctionReq.setUserModel(userRepo.findByMail(userControl.isLoginMailID));
 
 		functionreqRepo.save(createFunctionReq);
 

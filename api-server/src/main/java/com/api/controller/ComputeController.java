@@ -28,22 +28,22 @@ public class ComputeController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private UserController userControl;
 
 	//	private String redirectUrl = "http://localhost:8080/rest/v1";
-
-	public String isLoginMail = "";
-
 
 	//Get all
 	@GetMapping("/all")
 	public ResponseEntity<ApiResponse> getAllInstances() {
 		//		return new RedirectView(redirectUrl+"/user/getbymail/"+isLoginMail);
 
-		UserModel user = userRepo.findByMail(isLoginMail);
+		UserModel user = userRepo.findByMail(userControl.isLoginMailID);
 
 		if(user == null) {
 			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed");
-		}else if(isLoginMail == "") {
+		}else if(userControl.isLoginMailID == "") {
 			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
 		}
 
@@ -55,11 +55,11 @@ public class ComputeController {
 
 		if(createInstance == null) {
 			return new ApiResponse().errorSend(HttpStatus.FAILED_DEPENDENCY, "Failed");	
-		}else if(isLoginMail == "") {
+		}else if(userControl.isLoginMailID == "") {
 			return new ApiResponse().errorSend(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
 		}
 
-		createInstance.setUserModel(userRepo.findByMail(isLoginMail));
+		createInstance.setUserModel(userRepo.findByMail(userControl.isLoginMailID));
 
 		computeRepo.save(createInstance);
 
